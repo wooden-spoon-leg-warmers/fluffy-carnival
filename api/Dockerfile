@@ -1,4 +1,13 @@
-# Not this version might need to be changed later on depending on the api
-FROM python:3.8-slim
+FROM python:3.9-slim
 
-# RUN pip install ...
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["python", "app.py"]

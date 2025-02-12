@@ -24,7 +24,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/wooden-spoon-leg-warmers/fluffy-carnival/api
+            ghcr.io/${{ github.repository }}/api
           tags: |
             0.0.0-main
       - 
@@ -53,7 +53,7 @@ jobs:
         name: Publish Helm chart to GHCR
         run: |
           helm package api/helm/api --version 0.0.0-main --app-version 0.0.0-main
-          helm push api-0.0.0-main.tgz oci://ghcr.io/wooden-spoon-leg-warmers/fluffy-carnival/charts/api
+          helm push api-0.0.0-main.tgz oci://ghcr.io/${{ github.repository }}/charts
           rm api-0.0.0-main.tgz
 
 

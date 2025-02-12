@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: ghcr.io/wooden-spoon-leg-warmers/fluffy-carnival/charts/api
+    targetRevision: 0.0.0-main
+    chart: api  
+    helm:
+      releaseName: api
+      valuesObject:
+        image:
+          repository: ghcr.io/wooden-spoon-leg-warmers/fluffy-carnival/api
+        env:
+          - name: DATABASE_URL
+            value: postgres://postgres:password@postgres-service:5432/mydb
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: api
+
+  syncPolicy:
+    automated:
+      prune: true

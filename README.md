@@ -55,6 +55,21 @@ Tested the ci steps to build and push to the repo had a few issues I thought wer
 
 Looked at the whole setup of minikube and installed and tested on my local machine, installed argocd into it. Decided to generate argocd resources with kustomization locally and stored them in the argocd folder to commit, this decision means reducing the need for the end user to install helm and kubectl on their machine.
 
+### 9:10pm
+
+Setup basic secrets for argocd to access gh and for k8s to pull from ghcr.
+
+### 8:40am
+
+Decided to go down the path of using a make file to help manage the commands, this allows us to configure a top level .env file with the secrets and any other variables we need which can filter throughout the bootstrapping to configure certain things. Trying to make things repo agnostic so forks just work to help reproduce the project, but we will see if i run into any roadblocks here.
+
+- uncertain how I am going to approach one of the behaviours to implement: changes to the db IaC in main restart the database deployment. Don't exactly know the best approach for this since our database has no public access or tunnels currently, so gh actions cannot communicate with the db to either run tf against it or anything else. In a realworld scenario this isn't usually an issue. I don't think its nessissary to go down the path of creating a tunnel for this project. Could also look at argo events to watch the main branch and trigger a rollout restart of the db pod. (which is funny to me to restart the db 😅 on every IaC change)
+- looking at how to apply the yaml mapping of endpoint to query, I've decided to go down the path of storing it in a configmap inside its helm chart. I don't necessarily like this approach, I feel there could be a more elegent way to do things but its not standing out to me at this moment.
+
+### 8:58am
+
+Just realised I don't need any secrets... since that all this is in a public repo. I look to have it etched in my head that everything needs access to the repos.
+
 ## Installation
 
 ### Prerequisites
