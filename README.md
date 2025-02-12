@@ -70,6 +70,10 @@ Decided to go down the path of using a make file to help manage the commands, th
 
 Just realised I don't need any secrets... since that all this is in a public repo. I look to have it etched in my head that everything needs access to the repos.
 
+### 9:30am
+
+Was testing changes to the api and was getting issues with argocd cache on helm chart, since I wasn't versioning anything and pushing only to a main tag it wasn't invalidating the cache and showing the updates. Ive decided to revert to pointing argocd application directly to the api's helm chart repo path which will remove this. Changes my other tagging startegy for the containers aswell to just latest, seems more straight forward for this.
+
 ## Installation
 
 ### Prerequisites

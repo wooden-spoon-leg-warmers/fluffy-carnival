@@ -6,14 +6,16 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: ghcr.io/wooden-spoon-leg-warmers/fluffy-carnival/charts/api
-    targetRevision: 0.0.0-main
-    chart: api  
+    repoURL: https://github.com/wooden-spoon-leg-warmers/fluffy-carnival.git
+    path: api/helm/api
+    targetRevision: main
     helm:
       releaseName: api
       valuesObject:
         image:
+          pullPolicy: Always
           repository: ghcr.io/wooden-spoon-leg-warmers/fluffy-carnival/api
+          tag: latest
         env:
           - name: DATABASE_URL
             value: postgres://postgres:password@postgres-service:5432/mydb
