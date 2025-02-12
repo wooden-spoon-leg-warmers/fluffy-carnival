@@ -51,9 +51,47 @@ Couple things I will need to setup for k8s to work properly..
 
 Tested the ci steps to build and push to the repo had a few issues I thought were due to the pathing that ghcr allows but it ended up being a tick box in the UI to allow read and write perms for gh actions. Both helm and api look to be in the ghcr. Next will look at setting up the local k8s cluster.
 
+### 8:44pm
+
+Looked at the whole setup of minikube and installed and tested on my local machine, installed argocd into it. Decided to generate argocd resources with kustomization locally and stored them in the argocd folder to commit, this decision means reducing the need for the end user to install helm and kubectl on their machine.
+
 ## Installation
 
-```sh
-# Install docker on local machine.
+### Prerequisites
 
+There are some prerequisites to have already installed and configured to run this project.
+
+#### Docker
+
+We will be running this project in containers. [Docker Desktop](https://docs.docker.com/desktop/) is this easiest way to get started. Follow the installation guide for one of your platforms
+
+- MacOS [https://docs.docker.com/desktop/setup/install/mac-install/]
+- Windows [https://docs.docker.com/desktop/setup/install/windows-install/]
+- Linux [https://docs.docker.com/desktop/setup/install/linux/]
+
+Once installed check the docker daemon is running
+
+```sh
+docker info
+```
+
+#### Minikube
+
+Minikube is the kubernetes cluster which will run all the nessissary infrastructure to support the API.
+
+Install it by going to this site and choosing your choice of installation and platform relevent to your machine.
+
+[https://minikube.sigs.k8s.io/docs/start]
+
+Once installed run the following commands to start it
+
+```sh
+# Run this command to start the k8s cluster it will download and start it as a container in dockerhub.
+minikube start
+
+```
+
+### Setup
+
+```sh
 ```
