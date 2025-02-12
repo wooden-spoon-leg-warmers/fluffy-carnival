@@ -47,6 +47,9 @@ Couple things I will need to setup for k8s to work properly..
 - Will need 3 secrets, one for the image pulling and the 2 others for argocd to helm and repo changes.
 - Also might look at terraform to bootstrap the db and tables in postgres.
 
+### 8:08pm
+
+Tested the ci steps to build and push to the repo had a few issues I thought were due to the pathing that ghcr allows but it ended up being a tick box in the UI to allow read and write perms for gh actions. Both helm and api look to be in the ghcr. Next will look at setting up the local k8s cluster.
 
 ## Installation
 
