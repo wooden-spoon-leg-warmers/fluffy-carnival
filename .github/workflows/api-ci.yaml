@@ -1,0 +1,17 @@
+name: API CI
+
+# a hello world job for now
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Hello world
+      run: echo "Hello world"
+
+
+
+

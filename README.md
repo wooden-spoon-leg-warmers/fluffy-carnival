@@ -30,4 +30,17 @@ So overall design so far:
 ### 7:15pm
 
   Applied Journal notes into new gh repo, start investigating and building out folder structure. Mess around with the scripting to create the k8s clusters.
-  
+
+### 7:19pm
+
+  Going to use kustomization to apply the resources to support this setup. Just easy that way.
+
+  Will be just going with a mono repo for this, i am 95% confident argocd and gh actions can handle this behaviour to watch in directories. In an actual implementation i would rather have these seperate repos.
+
+
+## Installation
+
+```sh
+# Install docker on local machine.
+
+```
