@@ -25,17 +25,27 @@ So overall design so far:
 
 ### 7:01pm
 
-  I want to setup all infrastructure and linking of things first, create repo and gh user setup all that stuff.
+I want to setup all infrastructure and linking of things first, create repo and gh user setup all that stuff.
 
 ### 7:15pm
 
-  Applied Journal notes into new gh repo, start investigating and building out folder structure. Mess around with the scripting to create the k8s clusters.
+Applied Journal notes into new gh repo, start investigating and building out folder structure. Mess around with the scripting to create the k8s clusters.
 
 ### 7:19pm
 
-  Going to use kustomization to apply the resources to support this setup. Just easy that way.
+Going to use kustomization to apply the resources to support this setup. Just easy that way.
 
-  Will be just going with a mono repo for this, i am 95% confident argocd and gh actions can handle this behaviour to watch in directories. In an actual implementation i would rather have these seperate repos.
+Will be just going with a mono repo for this, i am 95% confident argocd and gh actions can handle this behaviour to watch in directories. In an actual implementation i would rather have these seperate repos.
+
+### 7:52pm
+  
+Added ci steps to gh actions to build the helm chart and docker image, However i am uncertain of the behaviour of the versioning, might be a little trial and error but since helm only supports semantic versioning with its packaging with OCI registries we must do 0.0.0-main. Might change to point to the repository directly in argocd app if its a pain and causes any problems. Going to test and see what i need to tweak, then move on to the boostrapping of the local k8s cluster.
+
+Couple things I will need to setup for k8s to work properly..
+
+- Generate a token in gh for registry and repository access.
+- Will need 3 secrets, one for the image pulling and the 2 others for argocd to helm and repo changes.
+- Also might look at terraform to bootstrap the db and tables in postgres.
 
 
 ## Installation
