@@ -102,7 +102,7 @@ env:
     value: postgres://api:password@postgresql.database.svc.cluster.local:5432/api
 
 mappings:
-- api_endpoint: /app.kubernetes.io/instance=api
+- api_endpoint: /myapi
   columns:
     id: myapi_id
     name: myapi_name
@@ -113,4 +113,4 @@ mappings:
     id: myapi2_id
     name: myapi2_name
     created_at: myapi2_created_at
-  query: SELECT id,name,created_at FROM othertable;
+  query: SELECT id,created_at FROM othertable;
