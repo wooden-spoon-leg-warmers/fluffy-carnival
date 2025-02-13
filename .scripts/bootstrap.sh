@@ -69,7 +69,7 @@ CONTENT=$(minikube kubectl -- kustomize local/api | sed "s|wooden-spoon-leg-warm
 echo "$CONTENT" | minikube kubectl -- apply -f -
 
 # Wait for the database to be ready
-wait_for_pod_ready "api" "app.kubernetes.io/name=api"
+wait_for_pod_ready "api" "app.kubernetes.io/instance=api"
 
 # Port forward the database
 minikube kubectl -- port-forward svc/api 3000:3000 -n api

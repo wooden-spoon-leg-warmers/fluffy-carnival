@@ -102,7 +102,7 @@ env:
     value: postgres://api:password@postgresql.database.svc.cluster.local:5432/api
 
 mappings:
-- api_endpoint: /myapi
+- api_endpoint: /app.kubernetes.io/instance=api
   columns:
     id: myapi_id
     name: myapi_name

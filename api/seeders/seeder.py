@@ -11,14 +11,14 @@ cur = conn.cursor()
 
 # Insert data into mytable
 cur.execute("""
-    INSERT INTO mytable (myapi_id, myapi_name, myapi_created_at) VALUES
+    INSERT INTO mytable (id, name, created_at) VALUES
     ('1', 'Sample Name 1', %s),
     ('2', 'Sample Name 2', %s);
 """, (datetime.now(), datetime.now()))
 
 # Insert data into othertable
 cur.execute("""
-    INSERT INTO othertable (myapi2_id, myapi2_name, myapi2_created_at) VALUES
+    INSERT INTO othertable (id, name, created_at) VALUES
     ('1', 'Other Sample Name 1', %s),
     ('2', 'Other Sample Name 2', %s);
 """, (datetime.now(), datetime.now()))

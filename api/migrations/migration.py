@@ -12,18 +12,16 @@ cur = conn.cursor()
 cur.execute("""
     CREATE TABLE IF NOT EXISTS mytable (
         id SERIAL PRIMARY KEY,
-        myapi_id VARCHAR(50),
-        myapi_name VARCHAR(100),
-        myapi_created_at TIMESTAMP
+        name VARCHAR(100),
+        created_at TIMESTAMP
     );
 """)
 
 cur.execute("""
     CREATE TABLE IF NOT EXISTS othertable (
         id SERIAL PRIMARY KEY,
-        myapi2_id VARCHAR(50),
-        myapi2_name VARCHAR(100),
-        myapi2_created_at TIMESTAMP
+        name VARCHAR(100),
+        created_at TIMESTAMP
     );
 """)
 
