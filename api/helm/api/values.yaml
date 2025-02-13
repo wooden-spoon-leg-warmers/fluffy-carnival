@@ -112,4 +112,5 @@ mappings:
   columns:
     id: id
     name: name
-  query: SELECT id,created_at FROM othertable;
+    created_at: created_at
+  query: SELECT id,name,created_at FROM othertable;
