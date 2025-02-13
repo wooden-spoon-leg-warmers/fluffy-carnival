@@ -17,9 +17,7 @@ wait_for_pod_ready() {
   # Loop until the pod is found
   while true; do
     echo "Looking for pod with label $LABEL in namespace $NAMESPACE..."
-    set +e
     POD_NAME=$(minikube kubectl -- get pod -l $LABEL -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}" 2>/dev/null)
-    set -e
     if [ -n "$POD_NAME" ]; then
       echo "Pod $POD_NAME found. Waiting for it to be ready..."
       break
@@ -71,6 +69,5 @@ echo "$CONTENT" | minikube kubectl -- apply -f -
 # Wait for the database to be ready
 wait_for_pod_ready "api" "app.kubernetes.io/name=api"
 
-kubectl get services api -n api
-
-minikube tunnel
+# Port forward the database
+minikube kubectl -- port-forward svc/api 3000:3000 -n api
