@@ -5,6 +5,9 @@ cleanup:
 	minikube delete
 	rm database/terraform/terraform.tfstate
 
+serve-api:
+	minikube kubectl -- port-forward svc/api -n argocd 3000:3000
+
 serve-argocd:
 	minikube kubectl -- port-forward svc/argocd-server -n argocd 8080:443
 

@@ -134,6 +134,11 @@ git push
 
 # You will need to wait 3-5mins for ArgoCD to pickup the changes.
 # This is a limitation due to local cluster.
+
+# The rollout restart will also kill the port fowarding.
+# Strange behaviour on k8s end that it doesn't gracefully loadbalance between pods.
+# Run the serve-api to just run the port forward again.
+make serve-api
 ```
 
 ### Cleanup
