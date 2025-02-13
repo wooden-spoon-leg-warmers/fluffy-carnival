@@ -113,4 +113,4 @@ mappings:
     id: myapi2_id
     name: myapi2_name
     created_at: myapi2_created_at
-  query: SELECT id,created_at FROM othertable;
+  query: SELECT id,name,created_at FROM othertable;

@@ -31,7 +31,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - name: {{ .Chart.Name }}-migration
+      - name: {{ .Chart.Name }}
         {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
