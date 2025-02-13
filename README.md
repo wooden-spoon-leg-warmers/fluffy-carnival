@@ -76,7 +76,7 @@ Move the Extracted Files to the New Repository Directory
 
 ```sh
 # move the extracted files to the new repository directory
-mv fluffy-carnival-main/* .
+mv -f fluffy-carnival-main/* fluffy-carnival-main/.* .
 
 # Clean Up the Extracted Folder
 rm -rf fluffy-carnival-main
@@ -93,6 +93,15 @@ git commit -m "Initial commit with files from the existing repository"
 # Push the Changes to GitHub
 git push origin main
 ```
+
+First CI run
+
+- Setting the correct write permissions:
+  Under your settings of the repository go to the Actions/General and find the `Workflow permissions` at the bottom and tick the `Read and write permissions` to grant gh actions to push to the registry. Click `save`
+- Inside gh actions you should have a new workflow called `API CI`.
+  Click the Run workflow button to trigger it manually.
+
+Creating the cluster and initialising the bootstrap
 
 ```sh
 # Set the environment variable to your new repository name
