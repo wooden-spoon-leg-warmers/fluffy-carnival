@@ -43,6 +43,11 @@ minikube kubectl -- apply -n argocd -f https://raw.githubusercontent.com/argopro
 # Wait for ArgoCD to be ready
 wait_for_pod_ready "argocd" "app.kubernetes.io/name=argocd-application-controller"
 
+# Restart all ArgoCD pods due to some issue? Maybe with minikube
+minikube kubectl -- rollout restart deployment -n argocd
+minikube kubectl -- rollout restart statefulset -n argocd
+wait_for_pod_ready "argocd" "app.kubernetes.io/name=argocd-application-controller"
+
 # Deploy the database
 minikube kubectl -- apply -k local/database
 # Wait for the database to be ready

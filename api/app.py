@@ -9,7 +9,7 @@ app = Flask(__name__)
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgres://api:password@postgresql.database.svc.cluster.local:5432/api')
 
 # Load configuration from YAML file
-with open('./config/mapping.yaml', 'r') as file:
+with open('config/mapping.yaml', 'r') as file:
     config = yaml.safe_load(file)
 
 # Create a lookup dictionary for API endpoints

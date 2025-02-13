@@ -9,4 +9,4 @@ metadata:
 data:
   mapping.yaml: |
     mappings:
-    {{ .Values.mappings | toYaml | nindent 6 }}
+    {{- .Values.mappings | toYaml | nindent 6 }}

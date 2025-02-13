@@ -83,6 +83,10 @@ Focused mostly on the bootstrapping, this highlighted quite abit of bloat which 
 - created a basic db terraform setup
 - make things simple to reduce any issues and the need to manage secrets and set the postgres user pw to password
 
+### 2:00pm
+
+Final testing an tweaking, tested few things and found little bugs here and there. Wrote up a installation guide, will be testing the IaC syncing part now and the general code of the api to see how it handles now all the infra is setup and i am happy with it.
+
 ## Installation
 
 ### Prerequisites
@@ -133,22 +137,77 @@ terraform version
 
 ### Setup
 
+Create a New Repository on GitHub:
+
+- Go to GitHub and log in to your account.
+- Click on the "+" icon in the top right corner and select "New repository".
+- Enter a repository name (e.g., new-repo) and optionally a description.
+- Choose to make the repository public.
+- Click "Create repository".
+
+Clone the New Repository to Your Local Machine:
+
 ```sh
-git clone --depth=1 
+# Replace <username> and <new-repo> with your GitHub username and the new repository name
+git clone https://github.com/<username>/<new-repo>.git
+cd <new-repo>
+```
 
-# Push to your repo
+Download This Repository as a Zip File:
 
-cd 
+```sh
+curl -L https://github.com/wooden-spoon-leg-warmers/fluffy-carnival/archive/refs/heads/main.zip -o repo.zip && unzip repo.zip && rm repo.zip
+```
 
-# Set env var to your repo name GITHUB_REPOSITORY=
+Move the Extracted Files to the New Repository Directory
 
+```sh
+# move the extracted files to the new repository directory
+mv fluffy-carnival-main/* .
+
+# Clean Up the Extracted Folder
+rm -rf fluffy-carnival-main
+```
+
+Add and Commit the Changes to the New Repository
+
+```sh
+git add .
+
+# Commit the changes with a message:
+git commit -m "Initial commit with files from the existing repository"
+
+# Push the Changes to GitHub
+git push origin main
+```
+
+```sh
+# Set the environment variable to your new repository name
+export GITHUB_REPOSITORY=<username>/<new-repo>
+
+# Run the bootstrap command
 make bootstrap
 ```
 
 ### Usage
 
-```sh
+While the last process in the bootstrap is still running (the port fowarding) the below commands will work to hit the endpoint.
 
+```sh
+curl http://localhost:3000/myapi
+
+curl http://localhost:3000/myapi2
+```
+
+For any updates the mapping, ArgoCD will pick up any changes to the helm chart.
+
+```sh
+# Change the mapping under, the mapping value takes an list of objects.
+cat api/helm/api/values.yaml
 ```
 
 ### Cleanup
+
+```sh
+make cleanup
+```
