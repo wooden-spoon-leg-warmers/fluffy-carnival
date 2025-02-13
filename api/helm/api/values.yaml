@@ -114,3 +114,8 @@ mappings:
     name: name
     created_at: created_at
   query: SELECT id,name,created_at FROM othertable;
+- api_endpoint: /myapi3
+  columns:
+    id: some_id
+    created_at: created_at
+  query: SELECT created_at,id FROM othertable;
