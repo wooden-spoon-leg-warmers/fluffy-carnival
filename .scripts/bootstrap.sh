@@ -17,7 +17,9 @@ wait_for_pod_ready() {
   # Loop until the pod is found
   while true; do
     echo "Looking for pod with label $LABEL in namespace $NAMESPACE..."
+    set +e
     POD_NAME=$(minikube kubectl -- get pod -l $LABEL -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}" 2>/dev/null)
+    set -e
     if [ -n "$POD_NAME" ]; then
       echo "Pod $POD_NAME found. Waiting for it to be ready..."
       break
@@ -39,11 +41,6 @@ minikube kubectl -- create namespace argocd || true
 minikube kubectl -- apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml --wait
 
 # Wait for ArgoCD to be ready
-wait_for_pod_ready "argocd" "app.kubernetes.io/name=argocd-application-controller"
-
-# Restart all ArgoCD pods due to some issue? Maybe with minikube
-minikube kubectl -- rollout restart deployment -n argocd
-minikube kubectl -- rollout restart statefulset -n argocd
 wait_for_pod_ready "argocd" "app.kubernetes.io/name=argocd-application-controller"
 
 # Deploy the database
