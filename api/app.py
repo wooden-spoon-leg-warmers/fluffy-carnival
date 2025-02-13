@@ -52,7 +52,9 @@ def health():
 def transform_data(data, columns):
     transformed_data = []
     for row in data:
-        transformed_row = {columns[col_name]: value for col_name, value in zip(columns.keys(), row)}
+        transformed_row = {}
+        for col_name, value in zip(columns.keys(), row):
+            transformed_row[columns[col_name]] = value
         transformed_data.append(transformed_row)
     return transformed_data
 
