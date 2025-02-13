@@ -4,6 +4,8 @@ metadata:
   name: {{ include "api.fullname" . }}
   labels:
     {{- include "api.labels" . | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -63,9 +65,14 @@ spec:
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
+            - name: config-volume
+              mountPath: /app/config
           {{- end }}
       {{- with .Values.volumes }}
       volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "api.fullname" . }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.nodeSelector }}

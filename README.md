@@ -74,6 +74,15 @@ Just realised I don't need any secrets... since that all this is in a public rep
 
 Was testing changes to the api and was getting issues with argocd cache on helm chart, since I wasn't versioning anything and pushing only to a main tag it wasn't invalidating the cache and showing the updates. Ive decided to revert to pointing argocd application directly to the api's helm chart repo path which will remove this. Changes my other tagging startegy for the containers aswell to just latest, seems more straight forward for this.
 
+### 12:24pm
+
+Focused mostly on the bootstrapping, this highlighted quite abit of bloat which is not needed for the end product. Quite a bit of cleanup simplifying parts, running make bootstrap will build all the infrastructure and runs all the pieces.
+
+- still unsure on how to get the database rollout restart working, looked briefly at argo events and it doesn't support a polling event on repos which means it could only do webooks. That wont work due as the local cluster is not exposed to the internet.
+- created a seeder and migration script job in the api to populate the table and data for the mapping
+- created a basic db terraform setup
+- make things simple to reduce any issues and the need to manage secrets and set the postgres user pw to password
+
 ## Installation
 
 ### Prerequisites
@@ -102,15 +111,44 @@ Install it by going to this site and choosing your choice of installation and pl
 
 [https://minikube.sigs.k8s.io/docs/start]
 
-Once installed run the following commands to start it
+Verify the minikube command works
 
 ```sh
-# Run this command to start the k8s cluster it will download and start it as a container in dockerhub.
-minikube start
+minikube version
+```
 
+#### Terraform
+
+Terraform is used to apply some configuration to the database
+
+Install it by going to this site and choosing your choice of installation and platform relevent to your machine.
+
+[https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli]
+
+Verify the terraform command works
+
+```sh
+terraform version
 ```
 
 ### Setup
 
 ```sh
+git clone --depth=1 
+
+# Push to your repo
+
+cd 
+
+# Set env var to your repo name GITHUB_REPOSITORY=
+
+make bootstrap
 ```
+
+### Usage
+
+```sh
+
+```
+
+### Cleanup

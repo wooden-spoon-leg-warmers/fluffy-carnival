@@ -18,7 +18,7 @@ spec:
           tag: latest
         env:
           - name: DATABASE_URL
-            value: postgres://postgres:password@postgres-service:5432/mydb
+            value: postgres://api:password@postgresql.database.svc.cluster.local:5432/api
 
   destination:
     server: https://kubernetes.default.svc

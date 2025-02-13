@@ -1,22 +1,16 @@
-include .env
-
-create-secrets:
-	# Create the secrets for the project
-	.scripts/create-secrets.sh 
-
-delete-secrets:
-	minikube kubectl -- delete secret -n argocd gh-registry
-	minikube kubectl -- delete secret -n argocd gh-repo
-	minikube kubectl -- delete secret -n argocd regcred
-
 bootstrap:
-	# Bootstrap the project
-	minikube start
+	./.scripts/bootstrap.sh
 
-argocd-serve:
-	# Serve the argocd
+cleanup:
+	minikube delete
+	rm database/terraform/terraform.tfstate
+
+serve-argocd:
 	minikube kubectl -- port-forward svc/argocd-server -n argocd 8080:443
 
-argocd-password:
-	# Get the password for the argocd
+serve-postgres:
+	minikube kubectl -- port-forward svc/postgresql -n database 5432:5432
+
+password-argocd:
 	minikube kubectl -- get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+

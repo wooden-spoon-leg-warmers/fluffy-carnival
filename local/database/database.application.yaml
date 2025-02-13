@@ -11,6 +11,9 @@ spec:
     targetRevision: 16.4.7
     helm:
       releaseName: postgresql
+      valuesObject:
+        auth:
+          postgresPassword: password
 
   destination:
     server: https://kubernetes.default.svc

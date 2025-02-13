@@ -6,7 +6,9 @@ COPY requirements.txt requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY migrations .
+COPY seeders .
+COPY app.py .
 
 EXPOSE 3000
 
